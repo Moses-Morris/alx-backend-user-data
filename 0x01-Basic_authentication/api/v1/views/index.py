@@ -30,4 +30,4 @@ def stats() -> str:
 def unauthorized():
     """ GET /api/v1/unauthorized
     """
-    return abort(401)
+    return jsonify(abort(401))
