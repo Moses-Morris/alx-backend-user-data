@@ -3,6 +3,7 @@
 """
 from flask import request
 from typing import Tuple, List, TypeVar
+import os
 
 
 class Auth:
@@ -49,3 +50,11 @@ class Auth:
         """ Check and authorize user
         """
         return None
+
+    def session_cookie(self, request=None):
+        '''self descriptive'''
+        if not request:
+            return None
+
+        session_name = os.getenv("SESSION_NAME")
+        return request.cookies.get(session_name)
