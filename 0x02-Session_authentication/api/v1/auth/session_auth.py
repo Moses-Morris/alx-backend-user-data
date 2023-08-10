@@ -34,18 +34,17 @@ class SessionAuth(Auth):
         return User.get(session_id)
 
     def destroy_session(self, request=None):
-        """kill a session
-        """
-        if request is None:
+        '''self descriptive'''
+        if not request:
+            return False
+        session_cookie = self.session_cookie(request)
+
+        if not session_cookie:
             return False
 
-        session_id = self.session_cookie(request)
-        if not session_id:
-            return False
+        user_id = self.user_id_for_session_id(session_cookie)
 
-        user_id = self.user_id_for_session_id(session_id)
         if not user_id:
             return False
-
-        self.user_id_by_session_id.pop(session_id, None)
+        self.user_id_by_session_id.pop(session_cookie)
         return True
