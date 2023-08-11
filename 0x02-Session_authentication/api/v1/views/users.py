@@ -27,6 +27,14 @@ def view_one_user(user_id: str = None) -> str:
     """
     if user_id is None:
         abort(404)
+
+    current_user = request.current_user
+
+    if user_id == "me":
+        if current_user is None:
+            abort(404)
+        return jsonify(current_user.to_json())
+
     user = User.get(user_id)
     if user is None:
         abort(404)
@@ -120,4 +128,3 @@ def update_user(user_id: str = None) -> str:
         user.last_name = rj.get('last_name')
     user.save()
     return jsonify(user.to_json()), 200
-
