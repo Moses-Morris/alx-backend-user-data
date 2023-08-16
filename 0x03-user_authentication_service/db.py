@@ -34,12 +34,12 @@ class DB:
 
         return the_user
 
-    def find_user_by(self, **kwargs) -> None:
-        """ Find a user in database. """
+    def find_user_by(self, **kargs) -> User:
+        ''' def find user '''
         try:
-            user = self._session.query(User).filter_by(**kwargs).first()
-            if user is None:
-                raise NoResultFound("Not Found")
-        except InvalidRequestError:
-            self._session.rollback()
+            user = self._session.query(User).filter_by(**kargs).first()
+        except TypeError:
+            raise InvalidRequestError
+        if user is None:
+            raise NoResultFound
         return user
