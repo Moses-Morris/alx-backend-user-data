@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """ SQL ALCHEMY MODEL """
-import sqlalchemy
+
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import String, Column, Integer
-from sqlalchemy import create_engine
+""" from sqlalchemy import create_engine """
 
 
-engine = create_engine('sqlite:///:memory:', echo=True)
+"""engine = create_engine('sqlite:///:memory:', echo=True)"""
 Base = declarative_base()
 print(sqlalchemy.__version__)
 
