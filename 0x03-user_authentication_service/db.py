@@ -43,4 +43,3 @@ class DB:
         except InvalidRequestError:
             self._session.rollback()
         return user
-
