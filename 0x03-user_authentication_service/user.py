@@ -1,18 +1,14 @@
 #!/usr/bin/env python3
-""" SQL ALCHEMY MODEL """
+''' Model user '''
 
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import String, Column, Integer
-""" from sqlalchemy import create_engine """
+from sqlalchemy import Column, Integer, String
 
-
-"""engine = create_engine('sqlite:///:memory:', echo=True)"""
 Base = declarative_base()
-print(sqlalchemy.__version__)
 
 
 class User(Base):
-    """ Create a model """
+    ''' Class user '''
     __tablename__ = 'users'
 
     id = Column(Integer, primary_key=True)
