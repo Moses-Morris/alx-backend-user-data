@@ -20,13 +20,12 @@ class Auth:
     def __init__(self):
         self._db = DB()
 
-    def register_user(self, email: str, password: str) -> bool:
-        """ Register new users only """
-        if email and password:
-            try:
-                self._db.find_user_by(email=email)
-            except NoResultFound:
-                user = self._db.add_user(email, _hash_password(password))
-                return user
-            else:
-                raise ValueError("User {} already exists".format(email))
+    def register_user(self, email: str, password: str) -> User:
+        """returns a user object"""
+        if self._db._session.query(User).filter_by(email=email).first():
+            raise ValueError(f"User {email} already exists")
+        _passwd = _hash_password(password)
+
+        user = User(email=email, hashed_password=_passwd)
+        self._db.add_user(email, _passwd)
+        return user
