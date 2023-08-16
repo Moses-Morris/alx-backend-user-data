@@ -10,7 +10,7 @@ from sqlalchemy.orm.exc import NoResultFound
 
 
 class DB:
-
+    """ DB Engine """
     def __init__(self):
         ''' def init '''
         self._engine = create_engine("sqlite:///a.db", echo=False)
