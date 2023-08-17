@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """ Good pins for a Flask App """
-from flask import Flask, jsonify, request, abort
+from flask import Flask, jsonify, request, abort, redirect, session
 from auth import Auth
 
 
@@ -47,9 +47,9 @@ def login():
         abort(401)
 
 
-@app.route('/sessions', methods=['DELETE'], strict_slashes=False)
-def logout() -> str:
-    ''' def logout '''
+@app.route('/sessions', methods=['DELETE', 'GET'], strict_slashes=False)
+def logout():
+    """ logout and kill session """
     session_cookie = request.cookies.get('session_id')
     user = AUTH.get_user_from_session_id(session_cookie)
     if user:
